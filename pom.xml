@@ -4,6 +4,38 @@
  
   <groupId>awstools.maven</groupId>
   <artifactId>maven-aws-s3</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
+
+  <distributionManagement>
+    <repository>
+      <id>bhp.maven.rep</id>
+      <url>s3://bhp-maven-repo/release</url>
+    </repository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>bhp.maven.repo</id>
+      <url>s3://bhp-maven-repo/release</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-provider-api</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>awstools.maven</groupId>
+        <artifactId>maven-aws-s3</artifactId>
+        <version>1.0</version>
+      </extension>
+    </extensions>
+  </build>
 </project>
