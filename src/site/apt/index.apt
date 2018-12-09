@@ -1,0 +1,10 @@
+ ------
+ Maven Wagon S3 lightweight
+ ------
+
+Features
+
+ * Get files from S3
+
+ * Put files to S3
+ 
