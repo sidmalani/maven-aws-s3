@@ -1,41 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
- 
-  <groupId>awstools.maven</groupId>
-  <artifactId>maven-aws-s3</artifactId>
+
+  <groupId>maven.aws.s3</groupId>
+  <artifactId>wagon-s3</artifactId>
+  <name>Apache Maven Wagon :: Providers :: S3 Provider</name>
   <version>0.1</version>
   <packaging>jar</packaging>
+  <description>
+    Wagon provider that gets and puts artifacts through http using standard Java library
+  </description>
 
-  <distributionManagement>
-    <repository>
-      <id>bhp.maven.rep</id>
-      <url>s3://bhp-maven-repo/release</url>
-    </repository>
-  </distributionManagement>
+  <properties>
+    <wagon.version>2.6</wagon.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-  <repositories>
-    <repository>
-      <id>bhp.maven.repo</id>
-      <url>s3://bhp-maven-repo/release</url>
-    </repository>
-  </repositories>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.maven.wagon</groupId>
       <artifactId>wagon-provider-api</artifactId>
-      <version>3.2.0</version>
+      <version>${wagon.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
-  <build>
-    <extensions>
-      <extension>
-        <groupId>awstools.maven</groupId>
-        <artifactId>maven-aws-s3</artifactId>
-        <version>1.0</version>
-      </extension>
-    </extensions>
-  </build>
 </project>
