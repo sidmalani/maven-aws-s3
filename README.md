@@ -43,7 +43,7 @@ To use the S3 artifactory add the following
 ```xml
   <repositories>
     <repository>
-      <id>bhp.maven.repo</id>
+      <id>reponame</id>
       <name>My artifactory</name>
       <url>s3://bucketname/release</url>
     </repository>
