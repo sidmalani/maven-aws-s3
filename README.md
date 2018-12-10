@@ -22,7 +22,7 @@ Modify your pom.xml - add the following to use the plugin to deploy.
   <distributionManagement>
     <repository>
       <id>reponame</id>
-      <name>BHP artifactory</name>
+      <name>My artifactory</name>
       <url>s3://bucketname/release</url>
     </repository>
   </distributionManagement>
@@ -44,8 +44,8 @@ To use the S3 artifactory add the following
   <repositories>
     <repository>
       <id>bhp.maven.repo</id>
-      <name>BHP artifactory</name>
-      <url>s3://bhp-maven-repo/release</url>
+      <name>My artifactory</name>
+      <url>s3://bucketname/release</url>
     </repository>
   </repositories>
 ```
