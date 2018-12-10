@@ -16,7 +16,7 @@ Modify your ~/.m2/settings.xml to include S3 server
   </servers>
 ```
 
-Modify your pom.xml - add the following
+Modify your pom.xml - add the following to use the plugin to deploy.
 
 ```xml
   <distributionManagement>
@@ -36,4 +36,16 @@ Modify your pom.xml - add the following
       </extension>
     </extensions>
   </build>
+```
+
+To use the S3 artifactory add the following
+
+```xml
+<repositories>
+    <repository>
+      <id>bhp.maven.repo</id>
+      <name>BHP artifactory</name>
+      <url>s3://bhp-maven-repo/release</url>
+    </repository>
+  </repositories>
 ```
