@@ -32,7 +32,7 @@ Modify your pom.xml - add the following to use the plugin to deploy.
       <extension>
         <groupId>io.github.sidmalani</groupId>
         <artifactId>wagon-s3</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
       </extension>
     </extensions>
   </build>
