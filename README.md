@@ -8,14 +8,17 @@ If you have configured the aws cli or you have got the federated login set up co
 
 Modify your ~/.m2/settings.xml to include S3 server
 
+```xml
   <servers>
     <server>
       <id>bhp.maven.repo</id>
     </server> 
   </servers>
+```
 
 Modify your pom.xml - add the following
 
+```xml
   <distributionManagement>
     <repository>
       <id>bhp.maven.repo</id>
@@ -33,3 +36,4 @@ Modify your pom.xml - add the following
       </extension>
     </extensions>
   </build>
+```
