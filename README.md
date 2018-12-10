@@ -41,7 +41,7 @@ Modify your pom.xml - add the following to use the plugin to deploy.
 To use the S3 artifactory add the following
 
 ```xml
-<repositories>
+  <repositories>
     <repository>
       <id>bhp.maven.repo</id>
       <name>BHP artifactory</name>
