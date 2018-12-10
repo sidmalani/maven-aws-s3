@@ -11,7 +11,7 @@ Modify your ~/.m2/settings.xml to include S3 server
 ```xml
   <servers>
     <server>
-      <id>bhp.maven.repo</id>
+      <id>reponame</id>
     </server> 
   </servers>
 ```
@@ -21,9 +21,9 @@ Modify your pom.xml - add the following
 ```xml
   <distributionManagement>
     <repository>
-      <id>bhp.maven.repo</id>
+      <id>reponame</id>
       <name>BHP artifactory</name>
-      <url>s3://bhp-maven-repo/release</url>
+      <url>s3://bucketname/release</url>
     </repository>
   </distributionManagement>
 
