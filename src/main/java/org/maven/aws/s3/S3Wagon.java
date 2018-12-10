@@ -7,8 +7,10 @@ import org.apache.maven.wagon.ResourceDoesNotExistException;
 import org.apache.maven.wagon.authentication.AuthenticationException;
 import org.apache.maven.wagon.authorization.AuthorizationException;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 /**
@@ -17,7 +19,6 @@ import java.util.logging.Logger;
 public class S3Wagon extends AbstractWagon
 {
 
-    private static final String PATH = "s3://bhp-maven-repo/release";
     Logger logger = Logger.getLogger( S3Wagon.class.getName() );
 
     @Override
@@ -35,7 +36,8 @@ public class S3Wagon extends AbstractWagon
     public void get( String resourceName, File destination )
             throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException
     {
-        String command = String.format("aws s3 cp %s/%s %s",  PATH, resourceName, destination.getAbsolutePath() );
+        String command = String.format("aws s3 cp %s/%s %s",
+                getRepository().getUrl(), resourceName, destination.getAbsolutePath() );
         logger.info( "Get Command : " + command );
         execute(command);
     }
@@ -49,19 +51,29 @@ public class S3Wagon extends AbstractWagon
     public void put( File source, String destination )
             throws TransferFailedException, ResourceDoesNotExistException, AuthorizationException
     {
-        String command = String.format("aws s3 cp %s %s/%s", source.getAbsolutePath(), PATH, destination);
+        String command = String.format("aws s3 cp %s %s/%s",
+                source.getAbsolutePath(), getRepository().getUrl(), destination);
         logger.info( "Put Command : " + command );
         execute(command);
     }
 
-    private void execute(String command) {
+    private void execute(String command) throws TransferFailedException {
         try {
             Process process = Runtime.getRuntime().exec( command );
+            try (
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            ) {
+                String line = null;
+                while ( ( line = reader.readLine() ) != null ) {
+                    logger.info( line );
+                    if ( line.toLowerCase().indexOf("error") >= 0 && !command.contains("maven-metadata")) {
+                        throw new TransferFailedException( "Error while transferring files " + line );
+                    }
+                }
+            }
             process.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch ( IOException | InterruptedException e ) {
+            throw new TransferFailedException( e.getMessage() );
         }
     }
 }

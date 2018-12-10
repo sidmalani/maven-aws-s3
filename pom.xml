@@ -5,11 +5,23 @@
   <groupId>io.github.sidmalani</groupId>
   <artifactId>wagon-s3</artifactId>
   <name>Apache Maven Wagon :: Providers :: S3 Provider</name>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <description>
     Wagon provider that uses aws cli to transfer files to S3. No need for http.
   </description>
+  <url>https://github.com/sidmalani/maven-aws-s3</url>
+  <developers>
+    <developer>
+      <name>Siddharth Malani</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/sidmalani/maven-aws-s3.git</connection>
+    <developerConnection>scm:git:git://github.com/sidmalani/maven-aws-s3.git</developerConnection>
+    <url>https://github.com/sidmalani/maven-aws-s3</url>
+  </scm>
 
   <properties>
     <wagon.version>2.6</wagon.version>
@@ -33,4 +45,64 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>7</source>
+          <target>7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 </project>
